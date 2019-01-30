@@ -1,0 +1,26 @@
+﻿@model GetCms.Samples.WebApp.Models.ViewModel.WebAppModelItem<GetCms.Models.Page>
+@{ 
+    Layout = $"_{Model.Item.MasterPage.Name}";
+}
+@section head {
+	<title>@Model.Item.Title</title>
+}
+
+<h1>@Model.Item.Name</h1>
+
+@if (Model.Item.Contents.Count > 0)
+{ 
+    foreach (var content in Model.Item.Contents)
+        {
+        if (content.Type == GetCms.Models.Enums.ContentTypes.InlineHTML)
+        {
+            @await Html.PartialAsync("InlineHTML", content)
+        }
+        else
+        {
+            @await Html.PartialAsync(content.Name)
+        } 
+    } 
+} 
+
+

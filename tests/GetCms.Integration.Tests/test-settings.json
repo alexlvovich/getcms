@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "default": "Server=alvovich-lp;Database=cms.test;Trusted_Connection=True;"
+  }
+}
