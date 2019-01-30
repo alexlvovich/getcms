@@ -14,9 +14,7 @@ It aims to make development easier while reducing developemnt time.
 
 ## Getting Started
 
-There is WebApp sample project which can be used for demo/learning purposes.
-
-[https://github.com/alexlvovich/getcms/samples](https://github.com/alexlvovich/getcms/samples)
+There is WebApp [sample](https://github.com/alexlvovich/getcms/tree/master/samples) project which can be used for demo/learning purposes.
 
 ### Prerequisites
 
@@ -61,11 +59,11 @@ There is a lot of work ahead! `:smiley:`
 
 * Nuget packages
 * Additional data providers
-    ..* EF
-    ..* MongoDB
-    ..* MySql
-    ..* PostgreSQL
-    ..* etc
+  * EF
+  * MongoDB
+  * MySql
+  * PostgreSQL
+  * etc
 * Management app
 
 ## Authors
