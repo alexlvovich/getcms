@@ -13,7 +13,6 @@ namespace GetCms.Models
 
         public Language Language { get; set; }
 
-
         public bool IsActive { get; set; }
         public int TimeZoneOffset { get; set; }
 

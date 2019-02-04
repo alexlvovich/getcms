@@ -50,12 +50,11 @@ namespace GetCms.DataAccess.SqlServer
                     MasterPageId = dr["MasterPageId"] != DBNull.Value ? dr.Value<int>("MasterPageId") : new int?(),
                     CreatedOn = Convert.ToDateTime(dr["CreatedOn"]),
                     CreatedBy = dr.Value<string>("CreatedBy"),
-
                     PublishedOn = dr["PublishedOn"] != DBNull.Value ? Convert.ToDateTime(dr["PublishedOn"]) : new DateTime?(),
                     PublishedBy = dr.Value<string>("PublishedBy"),
-
                     ModifiedOn = dr["ModifiedOn"] != DBNull.Value ? Convert.ToDateTime(dr["ModifiedOn"]) : new DateTime?(),
                     ModifiedBy = dr.Value<string>("ModifiedBy"),
+                    Title = dr.Value<string>("Title"),
                 };
 
                 if (total == 0)

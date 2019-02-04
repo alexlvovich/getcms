@@ -20,10 +20,6 @@ namespace GetCms.Models
 
         public int SiteId { get; set; }
 
-        //public short LanguageId { get; set; }
-
-
-     
         public string Title { get; set; }
 
 

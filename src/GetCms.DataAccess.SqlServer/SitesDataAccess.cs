@@ -50,7 +50,7 @@ namespace GetCms.DataAccess.SqlServer
                     Host = dr.Value<string>("Host"),
                     Language = Languages.English,
                     PageTitleSeparator = dr.Value<string>("PageTitleSeparator"),
-
+                    ContentType = dr.Value<string>("ContentType"),
                     CreatedOn = Convert.ToDateTime(dr["CreatedOn"]),
                     CreatedBy = dr.Value<string>("CreatedBy"),
 

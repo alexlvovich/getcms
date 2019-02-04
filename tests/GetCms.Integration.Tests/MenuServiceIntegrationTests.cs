@@ -16,8 +16,8 @@ namespace GetCms.Integration.Tests
     public class MenuServiceIntegrationTests : BaseIntegrationTests
     {
         private readonly IMenusService _menusService;
-        private int _menuCounter = 1;
-        private List<Menu> _menus = new List<Menu>();
+        private readonly int _menuCounter = 1;
+        private readonly List<Menu> _menus = new List<Menu>();
         
 
         public MenuServiceIntegrationTests()

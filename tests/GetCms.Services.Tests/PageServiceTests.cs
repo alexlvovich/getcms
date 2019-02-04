@@ -21,11 +21,11 @@ namespace GetCms.Services.Tests
     {
         private readonly IPageService _pageService;
         private int _pageCounter = 1;
-        private List<Page> _pages = new List<Page>();
+        private readonly List<Page> _pages = new List<Page>();
         private readonly Mock<IPagesDataAccess> _pagesDataAccess = new Mock<IPagesDataAccess>();
         private readonly Mock<IMetasService> _metaService = new Mock<IMetasService>();
         private readonly Mock<IContentService> _contentService = new Mock<IContentService>();
-
+        private readonly Mock<ISiteService> _siteService = new Mock<ISiteService>();
         public PageServiceTests()
         {
             _pagesDataAccess.Setup(m => m.SaveAsync(It.IsAny<Page>(), DataAccessActions.Insert))
@@ -49,7 +49,7 @@ namespace GetCms.Services.Tests
                 _pagesDataAccess.Object,
                 _metaService.Object,
                 _contentService.Object,
-                new PageValidator(_pagesDataAccess.Object));
+                new PageValidator(_pagesDataAccess.Object), _siteService.Object);
 
 
             _contentService.Setup(m => m.SaveAsync(It.IsAny<Content>(), It.IsAny<string>())).Returns(Task.FromResult(new Result() { NewId = 1 }));
@@ -290,11 +290,11 @@ namespace GetCms.Services.Tests
 
         private Page GetPage()
         {
-            Dictionary<string, MetaData> metaDatas = new Dictionary<string, MetaData>();
-
-
-            metaDatas.Add("keywords", new MetaData() { Value = "keywords test", Key = "keywords" });
-            metaDatas.Add("description", new MetaData() { Value = "description test", Key = "description" });
+            Dictionary<string, MetaData> metaDatas = new Dictionary<string, MetaData>
+            {
+                { "keywords", new MetaData() { Value = "keywords test", Key = "keywords" } },
+                { "description", new MetaData() { Value = "description test", Key = "description" } }
+            };
 
             string name = $"Test-{DateTime.Now.Ticks}";
             var page = new Page()

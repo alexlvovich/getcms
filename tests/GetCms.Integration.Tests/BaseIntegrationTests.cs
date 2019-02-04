@@ -54,7 +54,7 @@ namespace GetCms.Integration.Tests
                new SiteValidator());
 
             _pageService = new PagesService(loggerFactory, 
-                _pageDataAccess, _metasService, _contentService, new PageValidator(_pageDataAccess));
+                _pageDataAccess, _metasService, _contentService, new PageValidator(_pageDataAccess), _siteService);
 
 
             
@@ -74,7 +74,7 @@ namespace GetCms.Integration.Tests
 
             var rnd = new Random();
 
-            int i = rnd.Next(0, 9);
+            int i = rnd.Next(0, sites.Count-1);
 
             return sites[i];
         }
@@ -85,7 +85,7 @@ namespace GetCms.Integration.Tests
 
             var rnd = new Random();
 
-            int i = rnd.Next(0, 9);
+            int i = rnd.Next(0, pages.List.Count);
 
             return pages.List[i];
         }
