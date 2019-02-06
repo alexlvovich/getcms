@@ -1,6 +1,7 @@
 ﻿using GetCms.DataAccess.SqlServer.Constants;
 using GetCms.DataAccess.SqlServer.Extentions;
 using GetCms.Models;
+using GetCms.Models.Cms.Enums;
 using GetCms.Models.DataAccess;
 using GetCms.Models.Enums;
 using GetCms.Models.General;
@@ -55,6 +56,7 @@ namespace GetCms.DataAccess.SqlServer
                     ModifiedOn = dr["ModifiedOn"] != DBNull.Value ? Convert.ToDateTime(dr["ModifiedOn"]) : new DateTime?(),
                     ModifiedBy = dr.Value<string>("ModifiedBy"),
                     Title = dr.Value<string>("Title"),
+                    PageType = (PageTypes) dr.Value<byte>("PageTypeId")
                 };
 
                 if (total == 0)
