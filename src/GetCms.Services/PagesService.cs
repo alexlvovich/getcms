@@ -128,7 +128,7 @@ namespace GetCms.Services.Cms
 
         public async Task<Page> GetByIdAync(int pageId)
         {
-            var result = await GetByAsync(null, pageId, null, null, null, null, 0, 1);
+            var result = await GetByAsync(null, pageId, null, null, null, null,null, null, 0, 1);
 
             if (result.Total > 0)
                 return result.List[0];
@@ -138,7 +138,7 @@ namespace GetCms.Services.Cms
 
         public async Task<Page> GetByName(string name, int siteId)
         {
-            var result = await GetByAsync(siteId, null, name, null, null, null, 0, 1);
+            var result = await GetByAsync(siteId, null, name, null, null, null, null, null, 0, 1);
 
             if (result.Total > 0)
                 return result.List[0];
@@ -151,7 +151,7 @@ namespace GetCms.Services.Cms
             if (_pages.ContainsKey(t))
                 return _pages[t];
 
-            var result = await GetByAsync(siteId, null, null, slug, null, null, 0, 1);
+            var result = await GetByAsync(siteId, null, null, slug, null, null, null, null, 0, 1);
 
             if (result.Total > 0)
                 return result.List[0];
