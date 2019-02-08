@@ -37,8 +37,8 @@ namespace GetCms.Services.Tests
                 _pageCounter++;
             });
 
-            _pagesDataAccess.Setup(m => m.GetByAsync(It.IsAny<int>(), null, null, It.IsAny<string>(), 0, 1))
-            .Returns(async (int? siteId, int? id, string name, string slug, int from, int to) => {
+            _pagesDataAccess.Setup(m => m.GetByAsync(It.IsAny<int>(), null, null, It.IsAny<string>(), null, null, null, null, 0, 1))
+            .Returns(async (int? siteId, int? id, string name, string slug, bool? published, bool? active, int? parentId, byte? type, int from, int to) => {
 
                 var list = _pages.Where(p => p.Slug == slug && p.SiteId == siteId.Value).ToList();
 

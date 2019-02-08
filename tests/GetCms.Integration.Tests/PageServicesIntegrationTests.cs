@@ -118,7 +118,74 @@ namespace GetCms.Integration.Tests
             Assert.True(result.ValiationErrors.Count > 0);
         }
 
+        [Fact]
+        public async Task CreateChildPage()
+        {
+            var p = await GetRandomPage();
 
+            var page = await GetPage();
+
+            page.SiteId = p.SiteId;
+            page.ParentId = p.Id;
+
+            var result = await _pageService.SaveAsync(page, TEST_USER);
+
+            Assert.NotNull(result);
+
+            Assert.True(result.Succeeded);
+            Assert.True(result.NewId > 0);
+
+            var r = await _pageService.GetByAsync(p.SiteId, null, null, null, null, null, p.Id, null, 0, 10);
+
+            Assert.NotNull(r);
+            Assert.True(r.Total > 0);
+
+            foreach (var pg in r.List)
+            {
+                Assert.True(pg.ParentId == p.Id);
+            }
+
+        }
+
+        [Fact]
+        public async Task GetPublishedPage()
+        {
+            var p = await GetRandomPage();
+
+            p.PublishedBy = TEST_USER;
+            p.PublishedOn = DateTime.Now;
+
+
+            var result = await _pageService.SaveAsync(p, TEST_USER);
+
+            Assert.NotNull(result);
+
+            Assert.True(result.Succeeded);
+            Assert.True(result.NewId > 0);
+
+            var r = await _pageService.GetByAsync(p.SiteId, p.Id, null, null, true, null, null, null, 0, 1);
+
+            Assert.NotNull(r);
+            Assert.True(r.Total > 0);
+        }
+
+        [Fact]
+        public async Task GetNotPublishedPage()
+        {
+            var p = await GetRandomPage();
+            
+            var result = await _pageService.SaveAsync(p, TEST_USER);
+
+            Assert.NotNull(result);
+
+            Assert.True(result.Succeeded);
+            Assert.True(result.NewId > 0);
+
+            var r = await _pageService.GetByAsync(p.SiteId, p.Id, null, null, false, null, null, null, 0, 1);
+
+            Assert.NotNull(r);
+            Assert.True(r.Total > 0);
+        }
 
         //[Fact]
         //public void UpdatePageTest()

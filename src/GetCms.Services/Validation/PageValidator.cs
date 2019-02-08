@@ -32,10 +32,13 @@ namespace GetCms.Services.Validation
             }
             else
             {
-                // check for duplicate
-                var pages = _pagesDataAccess.GetByAsync(page.SiteId, null, null, page.Slug, 0, 1).Result;
-                if(pages.Total > 0)
-                    result.ValiationErrors.Add(CreateValidationError(page.Slug, "Page.Slug.Duplicate", "Slug duplicate."));
+                if (page.IsNew)
+                {
+                    // check for duplicate
+                    var pages = _pagesDataAccess.GetByAsync(page.SiteId, null, null, page.Slug, null, null, null, null, 0, 1).Result;
+                    if (pages.Total > 0)
+                        result.ValiationErrors.Add(CreateValidationError(page.Slug, "Page.Slug.Duplicate", "Slug duplicate."));
+                }
             }
 
             if (string.IsNullOrEmpty(page.CreatedBy))

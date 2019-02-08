@@ -41,9 +41,9 @@ namespace GetCms.Services.Cms
             this._siteService = siteService;
         }
 
-        public async Task<PagedResults<Page>> GetByAsync(int? siteId, int? id = null, string name = null, string slug = null, bool? published = null, bool? active = null, int from = 0, int to = 10)
+        public async Task<PagedResults<Page>> GetByAsync(int? siteId, int? id = null, string name = null, string slug = null, bool? published = null, bool? active = null, int? parentId = null, byte? type = null, int from = 0, int to = 10)
         {
-            var result = await _pageDataAccess.GetByAsync(siteId, id, name, slug, from, to);
+            var result = await _pageDataAccess.GetByAsync(siteId, id, name, slug, published, active, parentId, type, from, to);
 
             foreach (var p in result.List)
             {
@@ -191,7 +191,7 @@ namespace GetCms.Services.Cms
                 
                 while (count < total || count == 0)
                 {
-                    var pagesRes = await GetByAsync(siteId, null, null, null, null, true, count, count+10);
+                    var pagesRes = await GetByAsync(siteId, null, null, null, null, true, null, null, count, count+10);
 
                     if (total == 0)
                         total = pagesRes.Total;

@@ -7,6 +7,7 @@
     <Authors>Alexander Lvovich</Authors>
     <Company />
     <PackageProjectUrl>https://github.com/alexlvovich/getcms</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

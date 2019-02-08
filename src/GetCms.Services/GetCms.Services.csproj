@@ -7,6 +7,7 @@
     <RepositoryUrl>https://github.com/alexlvovich/getcms</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageProjectUrl>https://github.com/alexlvovich/getcms</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

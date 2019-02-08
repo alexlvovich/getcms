@@ -66,25 +66,25 @@ namespace GetCms.Integration.Tests
 
             Assert.NotNull(result);
 
-            Assert.True(result.Succeeded);
-            Assert.True(result.NewId > 0);
+            Assert.True(result.Succeeded, "creating failed");
+            Assert.True(result.NewId > 0, "id is 0");
 
             var metaData = await _metasService.GetAsync(page.Id, page.SiteId);
 
-            Assert.True(metaData.Count == 1);
+            Assert.True(metaData.Count > 0, "no metadata for the page");
 
             metaData[METAKEY].Value = "upadated value.";
 
             result = await _metasService.SaveAsync(metaData[METAKEY], UPDATEUSER);
 
-            Assert.True(result.Succeeded);
+            Assert.True(result.Succeeded, "saving failed");
 
             var metaDataUpdated = await _metasService.GetAsync(page.Id, page.SiteId);
 
-            Assert.True(metaDataUpdated.Count == 1);
+            Assert.True(metaDataUpdated.Count > 0, "no metadata for the page after update");
 
-            Assert.True(metaDataUpdated[METAKEY].Value == metaData[METAKEY].Value);
-            Assert.True(metaDataUpdated[METAKEY].ModifiedBy == UPDATEUSER);
+            Assert.True(metaDataUpdated[METAKEY].Value == metaData[METAKEY].Value, "meta value not match");
+            Assert.True(metaDataUpdated[METAKEY].ModifiedBy == UPDATEUSER, "upadate user is not match");
         }
 
         [Fact]

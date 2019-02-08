@@ -6,7 +6,7 @@ namespace GetCms.Models.Services
 {
     public interface IPageService
     {
-        Task<PagedResults<Page>> GetByAsync(int? siteId, int? id = null, string name = null, string slug = null, bool? published = null, bool? active = null, int from = 0, int to = 10);
+        Task<PagedResults<Page>> GetByAsync(int? siteId, int? id = null, string name = null, string slug = null, bool? published = null, bool? active = null, int? parentId = null, byte? type = null, int from = 0, int to = 10);
 
         Task<Result> SaveAsync(Page page, string username);
 

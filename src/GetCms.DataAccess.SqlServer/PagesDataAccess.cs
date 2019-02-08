@@ -21,17 +21,21 @@ namespace GetCms.DataAccess.SqlServer
         {
 
         }
-        public async Task<PagedResults<Page>> GetByAsync(int? siteId = null, int? id = null, string name = null, string slug = null, int start = 0, int to = 10)
+        public async Task<PagedResults<Page>> GetByAsync(int? siteId = null, int? id = null, string name = null, string slug = null, bool? published = null, bool? active = null, int? parentId = null, byte? type = null, int from = 0, int to = 10)
         {
             DataTable dt = new DataTable();
             List<Page> list = new List<Page>();
             SqlParameter[] parameters = new SqlParameter[]
             {
 
-                CreateSqlParameter("@SiteId", siteId.HasValue ? siteId.Value : new Nullable<int>()),
+                CreateSqlParameter("@SiteId", siteId??new Nullable<int>()),
                 CreateSqlParameter("@Name", name),
                 CreateSqlParameter("@Slug", slug),
-                CreateSqlParameter("@From", start),
+                CreateSqlParameter("@ParentId", parentId??new Nullable<int>()),
+                CreateSqlParameter("@PageTypeId", type??new byte?()),
+                CreateSqlParameter("@Published", published??new Nullable<bool>()),
+                CreateSqlParameter("@IsActive", active??new bool?()),
+                CreateSqlParameter("@From", from),
                 CreateSqlParameter("@To", to)
             };
 
@@ -48,6 +52,7 @@ namespace GetCms.DataAccess.SqlServer
                     Name = dr.Value<string>("Name"),
                     Slug = dr.Value<string>("Slug"),
                     SiteId = dr.Value<int>("SiteId"),
+                    ParentId = dr["ParentPageId"] != DBNull.Value ? dr.Value<int>("ParentPageId") : new int?(),
                     MasterPageId = dr["MasterPageId"] != DBNull.Value ? dr.Value<int>("MasterPageId") : new int?(),
                     CreatedOn = Convert.ToDateTime(dr["CreatedOn"]),
                     CreatedBy = dr.Value<string>("CreatedBy"),

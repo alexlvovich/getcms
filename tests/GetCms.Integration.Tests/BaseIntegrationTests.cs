@@ -81,7 +81,7 @@ namespace GetCms.Integration.Tests
 
         public async Task<Page> GetRandomPage()
         {
-            var pages = await _pageDataAccess.GetByAsync(null, null, string.Empty, string.Empty,  0, 10);
+            var pages = await _pageDataAccess.GetByAsync(null, null, string.Empty, string.Empty, false, null, null, null, 0, 10);
 
             var rnd = new Random();
 
