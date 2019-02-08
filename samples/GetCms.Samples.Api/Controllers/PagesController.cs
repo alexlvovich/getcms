@@ -29,9 +29,12 @@ namespace GetCms.Samples.Api
         }
 
         [HttpGet]
-        public async Task<PagedResults<Page>> Get(int? siteId = null, string name = null, string slug = null, int? id = null, bool? published = true, bool? active = true, int from = 0, int to = 20)
+        public async Task<PagedResults<Page>> Get(int? siteId = null, string name = null, 
+            string slug = null, int? id = null, bool? published = true, 
+            bool? active = true, int? parentId = null, byte? type = null, 
+            int from = 0, int to = 20)
         {
-            return await _pageService.GetByAsync(siteId, id, name, slug, published, active, from, to);
+            return await _pageService.GetByAsync(siteId, id, name, slug, published, active, parentId, type, from, to);
         }
 
 
